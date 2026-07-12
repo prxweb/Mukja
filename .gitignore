@@ -1,0 +1,24 @@
+# Secrets
+.env
+
+# Working screenshot artifacts
+temporary screenshots/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+
+# Claude Code local settings
+.claude/
+
+# Internal build instructions (not for the public repo)
+CLAUDE.md
+
+# Reference inputs (not part of the deliverable)
+unnamed.webp
+squirebarbershop.png
+rubber-stamp.webp
+www.daldongnae.png
+
+# Dependencies
+node_modules/
