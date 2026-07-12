@@ -290,7 +290,7 @@
   .modal{ position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:1.2rem;
     background:rgba(16,10,12,.72); backdrop-filter:blur(4px); }
   .modal[hidden]{ display:none; }
-  .modal__box{ position:relative; width:min(500px,100%); background:var(--cream-lt); color:var(--on-cream);
+  .modal__box{ position:relative; width:min(500px,100%); max-height:calc(100dvh - 2.4rem); overflow-y:auto; background:var(--cream-lt); color:var(--on-cream);
     border-radius:6px; padding:clamp(1.8rem,4vw,2.8rem); box-shadow:0 40px 90px -20px rgba(0,0,0,.7); border-top:3px solid var(--maroon);
     animation:pop .4s var(--ease) both; }
   @keyframes pop{ from{ opacity:0; transform:translateY(12px) scale(.98); } to{ opacity:1; transform:none; } }
@@ -304,10 +304,21 @@
   .modal__box h2{ font-family:"Marcellus",serif; font-weight:400; font-size:clamp(1.4rem,3vw,1.9rem); margin:.2rem 0 .8rem; letter-spacing:.01em; }
   .modal__box p{ font-size:.95rem; color:var(--on-cream-mut); margin:0 0 1.6rem; line-height:1.7; }
   .modal__box p strong{ color:var(--on-cream); font-weight:600; }
+  .modal__cta{ font-size:.9rem; color:var(--on-cream); line-height:1.65; margin:0 0 1.6rem; padding-top:1.2rem; border-top:1px solid var(--cream-dk); }
+  .modal__cta a{ color:var(--maroon); font-weight:600; text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1px; transition:color .2s var(--ease); }
+  .modal__cta a:hover{ color:var(--maroon-deep); }
   .modal__dismiss{ width:100%; }
   .modal__x{ position:absolute; top:12px; right:12px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; color:var(--on-cream-mut); border-radius:50%; transition:background-color .2s, color .2s; }
   .modal__x:hover{ background:rgba(96,32,56,.10); color:var(--maroon); }
   .modal__x svg{ width:22px; height:22px; }
+  /* Short landscape: tighten the modal so it fits without scrolling */
+  @media (orientation:landscape) and (max-height:480px){
+    .modal__box{ padding:1.3rem 1.7rem; }
+    .modal__top{ margin-bottom:.7rem; }
+    .modal__box h2{ font-size:1.3rem; margin:.1rem 0 .5rem; }
+    .modal__box p{ margin:0 0 .8rem; line-height:1.5; }
+    .modal__cta{ padding-top:.7rem; margin:0 0 .9rem; }
+  }
 
   /* ---------- Reveal ---------- */
   .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
@@ -598,6 +609,7 @@
     </div>
     <h2 id="modalTitle" data-fr="Vous consultez un aperçu">You're viewing a sample</h2>
     <p id="modalBody" data-fr-html="Ceci est un aperçu d'un site web pour <strong>Mukja</strong>, réalisé par <strong>Parallex Web Studio</strong>. Ce n'est pas le site officiel du restaurant, et il n'est ni affilié à Mukja ni approuvé par lui.">This is a design preview of a website for <strong>Mukja</strong>, created by <strong>Parallex Web Studio</strong>. It's not the restaurant's official site, and it isn't affiliated with or endorsed by <strong>Mukja</strong>.</p>
+    <p class="modal__cta" data-fr-html="<strong>Concrétisez votre site web.</strong> Écrivez-nous à <a href='mailto:contact@parallexweb.com'>contact@parallexweb.com</a>, ou visitez <a href='https://parallexweb.com' target='_blank' rel='noopener'>parallexweb.com</a>."><strong>Make your site a reality.</strong> Write to us at <a href="mailto:contact@parallexweb.com">contact@parallexweb.com</a>, or visit us at <a href="https://parallexweb.com" target="_blank" rel="noopener">parallexweb.com</a>.</p>
     <button class="btn btn--solid-dark modal__dismiss" id="modalDismiss" type="button" data-fr="Voir l'aperçu">View the preview</button>
   </div>
 </div>
