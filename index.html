@@ -61,7 +61,9 @@
   }
   .nav__inner{ width:min(var(--wrap),92vw); margin-inline:auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
   .nav__logo{ display:flex; align-items:center; }
-  .nav__logo img{ height:30px; width:auto; }
+  .nav__logo{ gap:.6rem; }
+  .nav__seal{ height:38px; width:auto; }
+  .nav__wordmark{ height:29px; width:auto; }
   .nav.scrolled{
     background:rgba(22,18,20,.86); backdrop-filter:blur(12px) saturate(120%);
     box-shadow:0 1px 0 rgba(243,236,226,.08), 0 10px 30px -18px rgba(0,0,0,.8);
@@ -119,9 +121,9 @@
   .hero__grain{ position:absolute; inset:0; z-index:-1; opacity:.10; mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   .hero__inner{ width:min(var(--wrap),90vw); margin-inline:auto; padding:calc(var(--nav-h) + 2rem) 0 clamp(3rem,7vh,5.5rem); position:relative; }
-  .hero__eyebrow{ display:flex; align-items:center; gap:.9rem; margin-bottom:1.1rem; }
-  .hero__eyebrow img{ width:44px; height:44px; filter:drop-shadow(0 2px 8px rgba(0,0,0,.4)); }
-  .hero__eyebrow .script{ font-size:clamp(1.9rem,4vw,2.7rem); color:var(--brass-lt); }
+  .hero__eyebrow{ display:flex; align-items:center; gap:1.1rem; margin-bottom:1.25rem; }
+  .hero__seal{ height:clamp(52px,7vw,66px); width:auto; filter:drop-shadow(0 2px 8px rgba(0,0,0,.45)); }
+  .hero__wordmark{ height:clamp(48px,6.4vw,60px); width:auto; filter:drop-shadow(0 3px 10px rgba(0,0,0,.45)); }
   .hero h1{
     margin:0; font-family:"Marcellus",serif; font-weight:400; text-transform:uppercase;
     font-size:clamp(2.5rem,6.4vw,5.2rem); line-height:1.02; letter-spacing:.015em;
@@ -148,14 +150,14 @@
   /* ---------- Sample stamp ---------- */
   .stamp{
     position:absolute; z-index:5; top:calc(var(--nav-h) + 14px); right:max(4vw,18px);
-    width:104px; height:104px; border-radius:50%; pointer-events:none;
+    width:158px; height:158px; border-radius:50%; pointer-events:none;
     display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
     color:var(--cream-lt); border:1.5px solid rgba(243,236,226,.55);
     background:rgba(56,13,26,.30); backdrop-filter:blur(2px);
     transform:rotate(-11deg); box-shadow:0 8px 24px -10px rgba(0,0,0,.6);
   }
-  .stamp b{ font-family:"Marcellus",serif; font-size:.98rem; letter-spacing:.14em; text-transform:uppercase; }
-  .stamp small{ font-size:.5rem; letter-spacing:.22em; text-transform:uppercase; margin-top:3px; color:var(--on-dark-mut); }
+  .stamp b{ font-family:"Marcellus",serif; font-size:1.42rem; letter-spacing:.14em; text-transform:uppercase; }
+  .stamp small{ font-size:.64rem; letter-spacing:.2em; text-transform:uppercase; margin-top:4px; color:var(--on-dark-mut); }
   .stamp .ring{ position:absolute; inset:6px; border-radius:50%; border:1px dashed rgba(243,236,226,.35); }
 
   /* ---------- Section shared ---------- */
@@ -208,28 +210,27 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   .menu .kicker h2{ color:var(--on-dark); }
   .menu__sub{ text-align:center; max-width:56ch; margin:0 auto clamp(2.4rem,4vw,3.4rem); color:var(--on-dark-mut); }
-  .menu__masonry{ columns:2; column-gap:clamp(1rem,2.2vw,1.8rem); }
-  @media (max-width:640px){ .menu__masonry{ columns:1; } }
-  .menu-card{
-    display:block; width:100%; break-inside:avoid; margin-bottom:clamp(1rem,2.2vw,1.8rem);
-    padding:0; text-align:left; border-radius:4px; overflow:hidden; position:relative;
-    background:var(--cream-lt); box-shadow:var(--sh-card);
-    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
-  }
-  .menu-card:hover{ transform:translateY(-4px); box-shadow:0 6px 14px rgba(0,0,0,.4), 0 40px 70px -30px rgba(0,0,0,.85); }
-  .menu-card img{ width:100%; height:auto; aspect-ratio:730 / 932; background:var(--cream-dk); }
-  .menu-card__cap{
-    position:absolute; left:0; right:0; bottom:0; padding:1.4rem 1.2rem .95rem;
-    display:flex; align-items:center; gap:.6rem;
-    background:linear-gradient(to top, rgba(24,15,18,.92), rgba(24,15,18,.55) 55%, transparent);
-    color:var(--cream-lt); opacity:0; transform:translateY(6px); transition:opacity .35s var(--ease), transform .35s var(--ease);
-  }
-  .menu-card:hover .menu-card__cap, .menu-card:focus-visible .menu-card__cap{ opacity:1; transform:none; }
-  .menu-card__cap .dot{ width:6px; height:6px; border-radius:50%; background:var(--brass-lt); flex:none; }
-  .menu-card__cap b{ font-family:"Marcellus",serif; font-weight:400; font-size:1.02rem; letter-spacing:.05em; text-transform:uppercase; }
-  .menu-card__view{ position:absolute; top:12px; right:12px; display:inline-flex; align-items:center; gap:.35rem; font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream-lt); background:rgba(56,13,26,.72); padding:.4rem .6rem; border-radius:2px; opacity:0; transition:opacity .35s var(--ease); }
-  .menu-card:hover .menu-card__view, .menu-card:focus-visible .menu-card__view{ opacity:1; }
-  .menu__note{ text-align:center; margin-top:2.4rem; font-size:.86rem; color:var(--on-dark-mut); }
+  /* Compact click-to-browse menu: a single cover (stacked-page look) + category chips */
+  .menu-browse{ display:flex; flex-direction:column; align-items:center; gap:clamp(1.8rem,3.5vw,2.6rem); }
+  .menu-cover-stack{ position:relative; width:min(360px,80vw); }
+  .menu-cover-stack::before, .menu-cover-stack::after{ content:""; position:absolute; inset:0; border-radius:5px; background:var(--cream-dk); box-shadow:var(--sh-soft); z-index:0; }
+  .menu-cover-stack::before{ transform:rotate(-3.2deg) translate(-10px,7px); opacity:.55; }
+  .menu-cover-stack::after{ transform:rotate(2.6deg) translate(10px,5px); opacity:.75; }
+  .menu-cover{ position:relative; z-index:1; display:block; width:100%; padding:0; border-radius:5px; overflow:hidden; cursor:pointer;
+    background:var(--cream-lt); box-shadow:var(--sh-card); transition:transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .menu-cover img{ width:100%; height:auto; aspect-ratio:730 / 932; background:var(--cream-dk); display:block; }
+  .menu-cover:hover{ transform:translateY(-5px) rotate(-.4deg); box-shadow:0 10px 20px rgba(0,0,0,.4), 0 46px 80px -30px rgba(0,0,0,.9); }
+  .menu-cover__label{ position:absolute; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; gap:.55rem;
+    padding:2.2rem 1rem 1.1rem; background:linear-gradient(to top, rgba(24,15,18,.94), rgba(24,15,18,.4) 60%, transparent);
+    color:var(--cream-lt); font-size:.76rem; letter-spacing:.18em; text-transform:uppercase; font-weight:600; }
+  .menu-cover__label svg{ width:15px; height:15px; }
+  .menu-cover:hover .menu-cover__label{ color:#fff; }
+  .menu-chips{ display:flex; flex-wrap:wrap; gap:.7rem; justify-content:center; max-width:760px; }
+  .menu-chip{ padding:.62rem 1.15rem; border:1px solid rgba(243,236,226,.22); border-radius:100px; color:var(--on-dark);
+    font-size:.8rem; letter-spacing:.03em; background:rgba(243,236,226,.03); white-space:nowrap;
+    transition:transform .28s var(--ease), background-color .28s var(--ease), border-color .28s var(--ease), color .28s var(--ease); }
+  .menu-chip:hover, .menu-chip:focus-visible{ border-color:var(--brass-lt); color:#fff; background:rgba(243,236,226,.08); transform:translateY(-2px); }
+  .menu__note{ text-align:center; margin-top:2.6rem; font-size:.86rem; color:var(--on-dark-mut); }
 
   /* ---------- Lightbox ---------- */
   .lightbox{ position:fixed; inset:0; z-index:90; display:flex; align-items:center; justify-content:center;
@@ -330,22 +331,24 @@
     .about__figure .seal{ width:74px; right:6px; bottom:-20px; }
   }
   @media (max-width:420px){
-    .stamp{ width:88px; height:88px; }
-    .stamp b{ font-size:.82rem; }
-    .hero__eyebrow img{ width:36px; height:36px; }
+    .stamp{ width:120px; height:120px; }
+    .stamp b{ font-size:1.05rem; }
+    .stamp small{ font-size:.5rem; }
+    .hero__seal{ height:46px; }
+    .hero__wordmark{ height:40px; }
   }
   /* Short landscape (phones turned sideways): compress hero so CTAs never clip */
   @media (orientation:landscape) and (max-height:540px){
     .hero__inner{ padding-top:calc(var(--nav-h) + .55rem); padding-bottom:1.1rem; }
     .hero__eyebrow{ margin-bottom:.4rem; }
-    .hero__eyebrow img{ width:30px; height:30px; }
-    .hero__eyebrow .script{ font-size:1.45rem; }
+    .hero__seal{ height:40px; }
+    .hero__wordmark{ height:34px; }
     .hero h1{ font-size:clamp(1.7rem,5vw,2.7rem); }
     .hero__sub{ margin:.6rem 0 .95rem; font-size:.9rem; max-width:52ch; }
     .hero__cta .btn{ padding:.62rem 1.15rem; }
-    .stamp{ width:72px; height:72px; top:calc(var(--nav-h) + 6px); }
-    .stamp b{ font-size:.72rem; }
-    .stamp small{ font-size:.42rem; }
+    .stamp{ width:104px; height:104px; top:calc(var(--nav-h) + 6px); }
+    .stamp b{ font-size:.95rem; }
+    .stamp small{ font-size:.5rem; }
   }
 </style>
 </head>
@@ -354,7 +357,7 @@
 <!-- ===== NAV ===== -->
 <nav class="nav" id="nav" aria-label="Primary">
   <div class="nav__inner">
-    <a class="nav__logo" href="#top" aria-label="Mukja — home"><img src="logo-cream.png" alt="Mukja" /></a>
+    <a class="nav__logo" href="#top" aria-label="Mukja — home"><img class="nav__seal" src="seal-cream.png" alt="" /><img class="nav__wordmark" src="mukja-wordmark.png" alt="Mukja" /></a>
     <div class="nav__links">
       <a class="nav__link" href="#menu" data-fr="Menu">Menu</a>
       <a class="nav__link" href="#about" data-fr="À propos">About</a>
@@ -399,8 +402,8 @@
   <div class="stamp" aria-hidden="true"><span class="ring"></span><b data-fr="Aperçu">Sample</b><small data-fr="Aperçu de conception">Design preview</small></div>
   <div class="hero__inner">
     <div class="hero__eyebrow reveal">
-      <img src="seal-cream.png" alt="" />
-      <span class="script" data-fr="Mangeons">Let's eat</span>
+      <img class="hero__seal" src="seal-cream.png" alt="" />
+      <img class="hero__wordmark" src="mukja-wordmark.png" alt="Mukja" />
     </div>
     <h1 class="reveal" data-fr-html="Cuisine coréenne<br>authentique à <em>Montréal</em>">Authentic Korean<br>kitchen in <em>Montréal</em></h1>
     <p class="hero__sub reveal" data-fr="En Corée, « As-tu mangé? » est une façon de demander « Comment vas-tu? ». Venez partager une table avec nous.">In Korea, “Did you eat?” is how you ask “How are you?” Come share a table with us.</p>
@@ -417,7 +420,6 @@
     <div class="about__grid">
       <figure class="about__figure reveal">
         <img src="photos/food-4.jpg" alt="A shared spread of Korean dishes on the table at Mukja" loading="lazy" />
-        <img class="seal" src="seal-maroon.png" alt="" />
       </figure>
       <div class="about__body reveal">
         <span class="eyebrow about__eyebrow" data-fr="Notre histoire">Our story</span>
@@ -463,10 +465,19 @@
       <h2 data-fr="Jeongsik & classiques coréens">Jeongsik & Korean classics</h2>
       <span class="rule"></span>
     </div>
-    <p class="menu__sub reveal" data-fr="Des plats servis avec riz, soupe et banchan à partager — plus des plats sino-coréens, des bouchées de rue et des boissons. Touchez une page pour l'agrandir.">Mains served with rice, soup and shared banchan — plus Korean-Chinese plates, street bites and drinks. Tap any page to read it up close.</p>
+    <p class="menu__sub reveal" data-fr="Des plats servis avec riz, soupe et banchan à partager — plus des plats sino-coréens, des bouchées de rue et des boissons. Ouvrez le menu pour parcourir les huit pages.">Mains served with rice, soup and shared banchan — plus Korean-Chinese plates, street bites and drinks. Open the menu to browse all eight pages.</p>
 
-    <div class="menu__masonry" id="menuGrid">
-      <!-- cards injected by JS -->
+    <div class="menu-browse reveal">
+      <div class="menu-cover-stack">
+        <button class="menu-cover" id="menuCover" type="button" aria-label="Open the menu and browse all pages" data-fr-aria="Ouvrir le menu et parcourir les pages">
+          <img src="menu/menu-1.jpg" width="730" height="932" alt="Mukja menu — open to browse" />
+          <span class="menu-cover__label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <span data-fr="Voir le menu · 8 pages">View the menu · 8 pages</span>
+          </span>
+        </button>
+      </div>
+      <div class="menu-chips" id="menuChips"><!-- chips injected by JS --></div>
     </div>
 
     <p class="menu__note reveal" data-fr="Les prix et la disponibilité peuvent changer. Des allergies? Demandez à votre serveur.">Prices and availability may change. Allergies? Please ask your server.</p>
@@ -519,7 +530,7 @@
   <div class="wrap">
     <div class="footer__grid">
       <div class="footer__col footer__brand">
-        <img src="logo-cream.png" alt="Mukja" />
+        <img src="logo-lockup.png" alt="Mukja" />
         <div class="script" data-fr="Mangeons">Let's eat</div>
       </div>
       <div class="footer__col">
@@ -563,7 +574,7 @@
   <button class="lb-btn lightbox__nav prev" id="lbPrev" type="button" aria-label="Previous page" data-fr-aria="Page précédente">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
   </button>
-  <img class="lightbox__img" id="lbImg" src="" alt="" />
+  <img class="lightbox__img" id="lbImg" alt="" />
   <button class="lb-btn lightbox__nav next" id="lbNext" type="button" aria-label="Next page" data-fr-aria="Page suivante">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
   </button>
@@ -608,24 +619,21 @@
   ];
 
   var lang = "en";
-  var VIEW = { en:"View", fr:"Agrandir" };
 
-  /* ---------- Build menu cards ---------- */
-  var grid = document.getElementById("menuGrid");
+  /* ---------- Build menu (compact browse): cover opens page 1, chips jump to a page ---------- */
+  var cover = document.getElementById("menuCover");
+  if(cover) cover.addEventListener("click", function(){ openLightbox(0); });
+  var chipsWrap = document.getElementById("menuChips");
   MENU.forEach(function(m, i){
-    var btn = document.createElement("button");
-    btn.className = "menu-card reveal";
-    btn.type = "button";
-    btn.setAttribute("data-idx", i);
-    btn.setAttribute("aria-label", m.en);
-    btn.setAttribute("data-en-label", m.en);
-    btn.setAttribute("data-fr-label", m.fr);
-    btn.innerHTML =
-      '<img src="'+m.src+'" alt="Mukja menu — '+m.en+'" width="730" height="932" />' +
-      '<span class="menu-card__view"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><span class="mc-view">'+VIEW[lang]+'</span></span>' +
-      '<span class="menu-card__cap"><span class="dot"></span><b>'+m.en+'</b></span>';
-    btn.addEventListener("click", function(){ openLightbox(i); });
-    grid.appendChild(btn);
+    var chip = document.createElement("button");
+    chip.className = "menu-chip";
+    chip.type = "button";
+    chip.setAttribute("data-idx", i);
+    chip.setAttribute("data-en-label", m.en);
+    chip.setAttribute("data-fr-label", m.fr);
+    chip.textContent = m.en;
+    chip.addEventListener("click", function(){ openLightbox(i); });
+    chipsWrap.appendChild(chip);
   });
 
   /* ---------- i18n ---------- */
@@ -653,14 +661,10 @@
       if(!el._enAria) el._enAria = el.getAttribute("aria-label");
       el.setAttribute("aria-label", next === "fr" ? el.getAttribute("data-fr-aria") : el._enAria);
     });
-    // menu card labels + view text
-    document.querySelectorAll(".menu-card").forEach(function(card){
-      var lbl = card.getAttribute("data-"+next+"-label") || card.getAttribute("data-en-label");
-      card.setAttribute("aria-label", lbl);
-      var b = card.querySelector(".menu-card__cap b");
-      if(b) b.textContent = lbl;
+    // menu category chips
+    document.querySelectorAll(".menu-chip").forEach(function(chip){
+      chip.textContent = chip.getAttribute("data-"+next+"-label") || chip.getAttribute("data-en-label");
     });
-    document.querySelectorAll(".mc-view").forEach(function(v){ v.textContent = VIEW[next]; });
     // toggle active states
     document.querySelectorAll("[data-navlang]").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-navlang") === next); });
     document.querySelectorAll("[data-setlang]").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-setlang") === next); });
