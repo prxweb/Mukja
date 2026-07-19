@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Mukja — Authentic Korean Restaurant · Montréal</title>
 <meta name="description" content="Mukja (먹자 — 'Let's Eat') is an authentic Korean restaurant in Montréal. Jeongsik sets, bibimbap, Korean-Chinese classics, stews and street bites — come share a table." />
+<link rel="icon" type="image/png" href="seal-maroon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Pinyon+Script&family=Epilogue:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet" />
@@ -240,14 +241,19 @@
   .lightbox__bar{ position:absolute; top:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:1.1rem 1.4rem; color:var(--on-dark); }
   .lightbox__label{ font-family:"Marcellus",serif; letter-spacing:.06em; text-transform:uppercase; font-size:1rem; }
   .lightbox__count{ font-size:.8rem; color:var(--on-dark-mut); letter-spacing:.1em; }
-  .lb-btn{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--on-dark); background:rgba(243,236,226,.08); transition:background-color .25s var(--ease), transform .25s var(--ease); }
-  .lb-btn:hover{ background:rgba(243,236,226,.18); transform:scale(1.05); }
+  .lb-btn{ width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--on-dark); background:rgba(243,236,226,.08); transition:background-color .25s var(--ease); }
+  .lb-btn:hover{ background:rgba(243,236,226,.18); }
   .lb-btn svg{ width:24px; height:24px; }
   .lightbox__close{ position:absolute; top:16px; right:18px; }
   .lightbox__nav{ position:absolute; top:50%; transform:translateY(-50%); }
   .lightbox__nav.prev{ left:max(1rem,3vw); }
   .lightbox__nav.next{ right:max(1rem,3vw); }
-  @media (max-width:640px){ .lightbox__nav.prev{ left:8px; } .lightbox__nav.next{ right:8px; } }
+  @media (max-width:640px){
+    .lightbox__nav.prev{ left:8px; } .lightbox__nav.next{ right:8px; }
+    /* arrows overlap the cream menu page on narrow screens — darken so they stay visible */
+    .lb-btn{ background:rgba(26,18,20,.55); }
+    .lb-btn:hover{ background:rgba(26,18,20,.72); }
+  }
 
   /* ---------- Visit ---------- */
   .visit{ background:var(--cream); }
@@ -608,7 +614,7 @@
       </div>
     </div>
     <h2 id="modalTitle" data-fr="Vous consultez un aperçu">You're viewing a sample</h2>
-    <p id="modalBody" data-fr-html="Ceci est un aperçu d'un site web pour <strong>Mukja</strong>, réalisé par <strong>Parallex Web Studio</strong>. Ce n'est pas le site officiel du restaurant, et il n'est ni affilié à Mukja ni approuvé par lui.">This is a design preview of a website for <strong>Mukja</strong>, created by <strong>Parallex Web Studio</strong>. It's not the restaurant's official site, and it isn't affiliated with or endorsed by <strong>Mukja</strong>.</p>
+    <p id="modalBody" data-fr-html="Ceci est un aperçu d'un site web pour <strong>Mukja</strong>, réalisé par <strong>Parallex Web Studio</strong>. Ce n'est pas le site officiel du restaurant, et il n'est ni affilié à Mukja ni approuvé par lui.">This is a design preview of a website for <strong>Mukja</strong>, created by <strong>Parallex Web Studio</strong>. It's not the restaurant's official site, and it isn't affiliated with or endorsed by Mukja.</p>
     <p class="modal__cta" data-fr-html="<strong>Concrétisez votre site web.</strong> Écrivez-nous à <a href='mailto:contact@parallexweb.com'>contact@parallexweb.com</a>, ou visitez <a href='https://parallexweb.com' target='_blank' rel='noopener'>parallexweb.com</a>."><strong>Make your site a reality.</strong> Write to us at <a href="mailto:contact@parallexweb.com">contact@parallexweb.com</a>, or visit us at <a href="https://parallexweb.com" target="_blank" rel="noopener">parallexweb.com</a>.</p>
     <button class="btn btn--solid-dark modal__dismiss" id="modalDismiss" type="button" data-fr="Voir l'aperçu">View the preview</button>
   </div>

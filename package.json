@@ -1,0 +1,8 @@
+{
+  "name": "mukja-site",
+  "private": true,
+  "description": "Mukja prospect sample site + standing tools (serve, screenshot, qa, prep-assets)",
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}
