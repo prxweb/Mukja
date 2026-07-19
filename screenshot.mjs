@@ -1,5 +1,6 @@
-// Screenshot helper for local QA.
-// Usage: node screenshot.mjs http://localhost:3001 [label]
+﻿// Screenshot helper for local QA.
+// Usage: node screenshot.mjs [url] [label]
+//   With no url, reads .devport (written by serve.mjs) and hits that server.
 // Env: VIEW_W, VIEW_H, FR=1, FULLPAGE=0, PRECLICK="sel1,sel2", SCROLLY=px, CLICK=sel
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
@@ -8,8 +9,21 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const url = process.argv[2] || 'http://localhost:3001';
-const label = process.argv[3] || '';
+
+// If the first arg looks like a URL, use it as the url; otherwise treat it as the
+// label and resolve the url from .devport. So `node screenshot.mjs mylabel` works.
+function resolveTarget() {
+  const a = process.argv[2];
+  if (a && /^https?:\/\//i.test(a)) return { url: a, label: process.argv[3] || '' };
+  let port = '';
+  try { port = fs.readFileSync(path.join(__dirname, '.devport'), 'utf8').trim(); } catch {}
+  if (!port) {
+    console.error('No url given and no .devport found — start the dev server first: node serve.mjs');
+    process.exit(1);
+  }
+  return { url: `http://localhost:${port}`, label: a || '' };
+}
+const { url, label } = resolveTarget();
 
 function getChromium() {
   const tries = [];

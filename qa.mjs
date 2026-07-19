@@ -1,5 +1,6 @@
 // qa.mjs — assertion-first QA harness. Text PASS/FAIL output, no screenshots.
-// Usage: node qa.mjs [url]        (default http://localhost:3009)
+// Usage: node qa.mjs [url]
+//   With no url, reads .devport (written by serve.mjs) and hits that server.
 //
 // Covers the mechanical parts of the CLAUDE.md mobile checklist so screenshots
 // are only needed for aesthetic judgment:
@@ -11,9 +12,23 @@
 // Selectors match this template's structure (#modalDismiss, #burger, #menuCover, ...).
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
+import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const url = process.argv[2] || 'http://localhost:3009';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// URL: explicit arg wins; otherwise read the port serve.mjs wrote to .devport.
+function resolveUrl() {
+  if (process.argv[2]) return process.argv[2];
+  try {
+    const p = fs.readFileSync(path.join(__dirname, '.devport'), 'utf8').trim();
+    if (p) return `http://localhost:${p}`;
+  } catch {}
+  console.error('No url given and no .devport found — start the dev server first: node serve.mjs');
+  process.exit(1);
+}
+const url = resolveUrl();
 
 function getChromium() {
   const tries = [];
@@ -37,7 +52,7 @@ async function launch(chromium) {
 const browser = await launch(getChromium());
 let pass = 0, fail = 0;
 function report(ok, name, detail) {
-  console.log(`[${ok ? 'PASS' : 'FAIL'}] ${name}${!ok && detail ? ' — ' + detail : ''}`);
+  console.log(`[${ok ? 'PASS' : 'FAIL'}] ${name}${!ok && detail ? ' - ' + detail : ''}`);
   ok ? pass++ : fail++;
 }
 async function newPage(w, h) {

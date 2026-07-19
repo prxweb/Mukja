@@ -4,6 +4,9 @@
 # Working screenshot artifacts
 temporary screenshots/
 
+# Auto-selected dev port (written by serve.mjs, read by screenshot.mjs / qa.mjs)
+.devport
+
 # OS / editor
 Thumbs.db
 .DS_Store

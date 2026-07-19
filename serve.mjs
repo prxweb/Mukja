@@ -1,11 +1,19 @@
-// Minimal static file server for local QA. Usage: node serve.mjs [port]
+﻿// Minimal static file server for local QA.
+// Usage: node serve.mjs           -> auto-picks the first free port from 3000 up
+//        node serve.mjs 3010      -> use an explicit port (fails if taken)
+// The chosen port is written to `.devport` in this folder; screenshot.mjs and
+// qa.mjs read it automatically, so no project ever needs a port typed anywhere.
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const port = Number(process.argv[2] || process.env.PORT || 3001);
+const projectName = path.basename(__dirname);
+const explicitPort = process.argv[2] || process.env.PORT;
+const startPort = Number(explicitPort || 3000);
+const autoFind = !explicitPort;   // only hunt for a free port when none was given
+const devportFile = path.join(__dirname, '.devport');
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -48,6 +56,30 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(port, () => {
-  console.log(`Mukja dev server running at http://localhost:${port}`);
-});
+// Try to bind; on EADDRINUSE, hop to the next port (up to 50 tries) when auto-finding.
+function attempt(port, triesLeft) {
+  const onError = (e) => {
+    server.removeListener('listening', onListening);
+    if (e.code === 'EADDRINUSE' && autoFind && triesLeft > 0) {
+      attempt(port + 1, triesLeft - 1);
+    } else {
+      console.error(`Could not start server on port ${port}: ${e.message}`);
+      process.exit(1);
+    }
+  };
+  const onListening = () => {
+    server.removeListener('error', onError);
+    const actual = server.address().port;
+    try { fs.writeFileSync(devportFile, String(actual)); } catch {}
+    console.log(`${projectName} dev server running at http://localhost:${actual}`);
+    console.log(`(port ${actual} written to .devport — screenshot.mjs and qa.mjs read it automatically)`);
+  };
+  server.once('error', onError);
+  server.once('listening', onListening);
+  server.listen(port);
+}
+// Clean up the .devport file on exit so a dead server doesn't leave a stale port.
+for (const sig of ['SIGINT', 'SIGTERM', 'exit']) {
+  process.once(sig, () => { try { fs.unlinkSync(devportFile); } catch {} });
+}
+attempt(startPort, autoFind ? 50 : 0);
